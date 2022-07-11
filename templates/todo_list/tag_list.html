@@ -1,0 +1,41 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Tags</h1>
+    <button style="float: right; margin-right: 25px; bottom: 50px; position:relative;" class="btn btn-primary">
+        <a role="button" style="color: white"
+           href="{% url 'todo_list:tag-create'%}">Add</a>
+    </button>
+
+    {% if tag_list %}
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            {% for tag in tag_list %}
+                <tr>
+                    <td>{{ tag.title }}</td>
+                    <td>
+                        <button style="background: gray" class="btn"><a role="button" style="color: white"
+                                                                        href="{% url 'todo_list:tag-update' pk=tag.id %}">Update</a>
+                        </button>
+                    </td>
+                    <td>
+                        <button style="background: gray" class="btn"><a role="button" style="color: white"
+                                                                        href="{% url 'todo_list:tag-delete' pk=tag.id %}">Delete</a>
+                        </button>
+                    </td>
+
+                </tr>
+            {% endfor %}
+
+        </table>
+
+    {% else %}
+        <p>Empty list</p>
+    {% endif %}
+
+{% endblock %}
